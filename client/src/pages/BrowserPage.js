@@ -22,7 +22,7 @@ export default class Browser extends Component {
         this.setState({sort:e.target.value})
         console.log(e.target.value)
         axios
-            .post("http://localhost:5000/games/sort/" + this.state.typeSelected + "/" + e.target.value )
+            .post("https://amadas.herokuapp.com/games/sort/" + this.state.typeSelected + "/" + e.target.value )
             .then((res) => {
                 this.setState({ games: res.data });
                 alert("Load successfully.")
@@ -38,34 +38,34 @@ export default class Browser extends Component {
         this.setState({ typeSelected: e.target.getAttribute("name") })
         let idType = e.target.getAttribute('name')
         await axios
-            .get("http://localhost:5000/types/" + idType)
+            .get("https://amadas.herokuapp.com/types/" + idType)
             .then((res) => {
                 this.setState({ games: res.data });
                 alert("Load successfully.")
             })
             .catch((err) => console.log(err));
         this.showPages()
-        axios.post("http://localhost:5000/games/sort/"+idType+"/0/1").then(res=>{
+        axios.post("https://amadas.herokuapp.com/games/sort/"+idType+"/0/1").then(res=>{
             this.setState({games: res.data})
             alert("Load successfully.")
         })
     }
     async componentDidMount() {
         await axios
-            .get("http://localhost:5000/types/get/names")
+            .get("https://amadas.herokuapp.com/types/get/names")
             .then((res) => {
                 this.setState({ types: res.data });
             })
             .catch((err) => console.log(err));
         await axios
-            .get("http://localhost:5000/games/")
+            .get("https://amadas.herokuapp.com/games/")
             .then((res) => {
                 this.setState({ games: res.data });
                 alert("Load successfully.")
             })
             .catch((err) => console.log(err));
        this.showPages(await this.state.games)
-       axios.post("http://localhost:5000/games/sort/0/0/1").then(res=>{
+       axios.post("https://amadas.herokuapp.com/games/sort/0/0/1").then(res=>{
             this.setState({games: res.data})
             alert("Load successfully.")
         })
@@ -81,7 +81,7 @@ export default class Browser extends Component {
     }
      getData(e) {
         let page=e.target.getAttribute("name")
-        axios.post("http://localhost:5000/games/sort/"+this.state.typeSelected+"/"+this.state.sort+"/"+page).then(res=>{
+        axios.post("https://amadas.herokuapp.com/games/sort/"+this.state.typeSelected+"/"+this.state.sort+"/"+page).then(res=>{
             this.setState({games: res.data})
         })
     }

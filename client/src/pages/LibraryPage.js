@@ -14,7 +14,7 @@ export default class LibraryPage extends Component {
         if (sessionStorage && sessionStorage.getItem("username")) {
             console.log(sessionStorage.getItem('id'))
             axios
-                .get("http://localhost:5000/librarys/" + await sessionStorage.getItem("id"))
+                .get("https://amadas.herokuapp.com/librarys/" + await sessionStorage.getItem("id"))
                 .then((res) => {
                     console.log(sessionStorage.getItem('id'))
                     this.setState({ games:res.data[0].games });
